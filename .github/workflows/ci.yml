@@ -13,4 +13,6 @@ jobs:
       - run: npm run build
       - run: npm audit --audit-level=high
       - run: pip install -r backend/requirements.lock
-      - run: cd backend && pytest tests -q
+      - name: Run backend tests
+        working-directory: backend
+        run: python -m pytest tests -q
