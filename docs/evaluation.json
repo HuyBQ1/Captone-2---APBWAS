@@ -1,0 +1,64 @@
+{
+  "environment": "Windows local harness; SQLite test database; no Redis; demo hash embedding; no LLM API call",
+  "workflows": [
+    {
+      "request": "Phân tích doanh thu tháng này và so sánh với tháng trước.",
+      "status": "completed",
+      "accept_seconds": 1.015,
+      "stream_first_byte_seconds": 0.003,
+      "first_useful_seconds": 3.57,
+      "complete_seconds": 5.614,
+      "tool_calls": 3
+    },
+    {
+      "request": "Kiểm tra sản phẩm sắp hết hàng.",
+      "status": "completed",
+      "accept_seconds": 1.017,
+      "stream_first_byte_seconds": 0.004,
+      "first_useful_seconds": 2.511,
+      "complete_seconds": 2.511,
+      "tool_calls": 1
+    },
+    {
+      "request": "Tóm tắt chính sách nghỉ phép và dẫn nguồn.",
+      "status": "completed",
+      "accept_seconds": 1.015,
+      "stream_first_byte_seconds": 0.003,
+      "first_useful_seconds": 2.564,
+      "complete_seconds": 2.564,
+      "tool_calls": 1
+    },
+    {
+      "request": "Tạo báo cáo doanh thu theo danh mục.",
+      "status": "completed",
+      "accept_seconds": 1.016,
+      "stream_first_byte_seconds": 0.003,
+      "first_useful_seconds": 3.553,
+      "complete_seconds": 5.566,
+      "tool_calls": 3
+    }
+  ],
+  "retrieval": [
+    {
+      "query": "chính sách nghỉ phép",
+      "top5_contains_expected": true,
+      "seconds": 0.005
+    },
+    {
+      "query": "ngưỡng cảnh báo tồn kho",
+      "top5_contains_expected": true,
+      "seconds": 0.003
+    },
+    {
+      "query": "báo cáo doanh thu",
+      "top5_contains_expected": true,
+      "seconds": 0.003
+    }
+  ],
+  "limitations": [
+    "Small fixed seed dataset only.",
+    "Not a 10,000 chunk pgvector benchmark.",
+    "No Connected Mode/provider latency claim.",
+    "No availability or concurrent PostgreSQL approval claim."
+  ]
+}

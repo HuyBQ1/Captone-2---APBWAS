@@ -1,0 +1,23 @@
+import {chromium} from '@playwright/test';
+import fs from 'node:fs';
+fs.mkdirSync('docs/screenshots',{recursive:true});
+const browser=await chromium.launch();
+const page=await browser.newPage({viewport:{width:1440,height:1080},deviceScaleFactor:1});
+await page.emulateMedia({reducedMotion:'reduce'});
+async function settle(){await page.waitForFunction(()=>Array.from(document.querySelectorAll('main>div,.metric-card')).every(element=>getComputedStyle(element).opacity==='1'));await page.waitForTimeout(400)}
+await page.goto('http://127.0.0.1:5173');
+await page.getByRole('button',{name:'Admin',exact:true}).click();
+await page.getByRole('button',{name:'Đăng nhập',exact:true}).click();
+await page.getByRole('heading',{name:/Chào/}).waitFor();
+await settle();
+await page.screenshot({path:'docs/screenshots/dashboard.png',fullPage:true});
+await page.goto('http://127.0.0.1:5173/workspace');
+await page.getByRole('heading',{name:/AI Workspace/}).waitFor();
+await settle();
+await page.screenshot({path:'docs/screenshots/workspace.png',fullPage:true});
+await page.setViewportSize({width:390,height:844});
+await page.goto('http://127.0.0.1:5173');
+await page.getByRole('heading',{name:/Chào/}).waitFor();
+await settle();
+await page.screenshot({path:'docs/screenshots/mobile.png',fullPage:true});
+await browser.close();
