@@ -14,12 +14,18 @@ from .workflows import process
 
 def seed():
     with Session() as db:
+        if not db.get(Workspace,'primary'):db.add(Workspace(id='primary',name='Primary company workspace'));db.commit()
         for name,values in DEFAULT_PERMISSIONS.items():
             if not db.get(Role,name): db.add(Role(name=name,permissions=values))
         for name in set(p for values in DEFAULT_PERMISSIONS.values() for p in values):
             if not db.get(Permission,name): db.add(Permission(name=name))
         if not db.get(SystemSetting,'limits'): db.add(SystemSetting(key='limits',value=DEFAULT_CONFIG))
+        if not db.get(SystemSetting,'company'):
+            db.add(SystemSetting(key='company',value={'name':'Nova Commerce','email':'','phone':'','address':'','tax_code':''}))
         db.commit()
+        if db.get(SystemSetting,'sample-data-removed-v1'):
+            print('Sample data was explicitly removed; automatic demo seeding is disabled.')
+            return
         if not settings.demo_mode:
             print('Connected Mode: roles seeded; create first admin via bootstrap_admin.py with an explicit password.')
             return
@@ -45,9 +51,11 @@ def seed():
                 number=today.year*12+today.month-1-ago
                 year,month=number//12,number%12+1
                 for day in [2,7,12]:
+                    when=datetime(year,month,day,12,tzinfo=today.tzinfo)
+                    if when>today:continue
                     units=8+(index*7+ago*3+day)%35
                     if ago==0: units+=5
-                    db.add(Sale(product_id=p.id,date=datetime(year,month,day,12,tzinfo=today.tzinfo),quantity=units,revenue=units*price))
+                    db.add(Sale(product_id=p.id,date=when,quantity=units,revenue=units*price))
         db.commit()
         for name,scope,content in [
             ('Chính sách nghỉ phép 2026.txt','all','CHÍNH SÁCH NGHỈ PHÉP — DỮ LIỆU GIẢ LẬP\nNhân viên có 12 ngày nghỉ phép hưởng lương mỗi năm. Đăng ký trước ít nhất 3 ngày làm việc. Quản lý trực tiếp phê duyệt trên hệ thống. Nghỉ khẩn cấp cần thông báo quản lý trong ngày. Ngày phép chưa dùng được chuyển tối đa 5 ngày sang quý I năm sau.'),

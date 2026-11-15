@@ -16,7 +16,6 @@ def quota(db,user):
     config = configuration(db)
     # Serialize reservations per user; persistent fallback when Redis is down.
     if db.bind.dialect.name == 'postgresql':
-        db.execute(select(Workflow.id).where(Workflow.user_id == user.id).with_for_update())
         from sqlalchemy import text
         import hashlib
         db.execute(text('SELECT pg_advisory_xact_lock(:key)'),{'key':int(hashlib.sha256(user.id.encode()).hexdigest()[:8],16)})

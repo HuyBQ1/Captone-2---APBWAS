@@ -16,3 +16,8 @@ uploads/
 test-results/
 playwright-report/
 *.tsbuildinfo
+.test-tmp/
+backups/
+outputs/
+docs/database-design/qa/
+docs/database-design/template-work/

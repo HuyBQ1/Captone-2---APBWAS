@@ -1,0 +1,236 @@
+[
+  {
+    "id": "d97ac580-7b9e-41dc-bbd0-a89ee4b388f5",
+    "code": "NC-AI-001",
+    "title": "Hướng dẫn sử dụng trợ lý nghiệp vụ có kiểm soát",
+    "scope": "all",
+    "file": "NC-AI-001_Huong_dan_su_dung_tro_ly_nghiep_vu_co_kiem_soat_v1.1.docx",
+    "source_sha256": "798a38f970c98cae8826a0e7e04e3e7675b6e50f3a611266308464f6e316c6b2",
+    "sha256": "0fda07723be6c51e9ac901964bf661adf07972c8d38578c868dc2c99391de9cb"
+  },
+  {
+    "id": "1d5b7742-3a39-4092-a9b0-3065874666b9",
+    "code": "NC-CAT-001",
+    "title": "Danh mục hàng hóa điện tử",
+    "scope": "all",
+    "file": "NC-CAT-001_Danh_muc_hang_hoa_dien_tu_v1.1.docx",
+    "source_sha256": "2069ce0de08dedec5406709f0219ba01511a26ecd12fbafb086bd6cd3bdf553f",
+    "sha256": "83ad1b2b338fd36d675c40bde6577da2b7c6c74041baaf8adc65e1c61fc61bc4"
+  },
+  {
+    "id": "4a456e9f-c753-433f-85b9-1b53cb97035d",
+    "code": "NC-CAT-002",
+    "title": "Danh mục hàng hóa gia dụng",
+    "scope": "all",
+    "file": "NC-CAT-002_Danh_muc_hang_hoa_gia_dung_v1.1.docx",
+    "source_sha256": "ed8f6c6693381d507bcc79dc9540fcee1ce6d8d68589e82f23271c7f2092993e",
+    "sha256": "84a1ebdb58f5e0bb72ae0a11627a733a7d8e29043befb6941d65dc1c816064e6"
+  },
+  {
+    "id": "ed12fac3-61cf-4756-9b8e-6661c934f5ba",
+    "code": "NC-CAT-003",
+    "title": "Danh mục hàng hóa nội thất",
+    "scope": "all",
+    "file": "NC-CAT-003_Danh_muc_hang_hoa_noi_that_v1.1.docx",
+    "source_sha256": "9ee828ad8e8b13e84592cae133b3b40788634e0b18bfb54f6fd552e7977c32cc",
+    "sha256": "c6777c5eb22f0c676d3239319a7d58518d252ae17216e58d234fb80227105c0c"
+  },
+  {
+    "id": "5de9f9c6-e238-4f68-9b70-862e35bbb922",
+    "code": "NC-CAT-004",
+    "title": "Danh mục hàng hóa thiết bị văn phòng",
+    "scope": "all",
+    "file": "NC-CAT-004_Danh_muc_hang_hoa_thiet_bi_van_phong_v1.1.docx",
+    "source_sha256": "b6d62dfe238e81007c759165f5a8321d7a7639e05b620415b0ebd572dfc3a42a",
+    "sha256": "99c05dc1d48db012dbae782e278ee7152420ff80cc9c3bc74361572b33446ae4"
+  },
+  {
+    "id": "3980d845-448e-440a-bd0a-eec905bfec65",
+    "code": "NC-CAT-005",
+    "title": "Danh mục hàng hóa thiết bị mạng",
+    "scope": "all",
+    "file": "NC-CAT-005_Danh_muc_hang_hoa_thiet_bi_mang_v1.1.docx",
+    "source_sha256": "aad863f44cba2c97440b6feea56218d743ec564453f79effe4c5edd6712547d5",
+    "sha256": "e1f0d7fc5d23d576f60772990bf91aed4fa07d3465c2f76c8b85fd20957cfbfa"
+  },
+  {
+    "id": "dbeb7f64-fa5a-449c-a337-71f74626af2c",
+    "code": "NC-CAT-006",
+    "title": "Danh mục hàng hóa văn phòng phẩm",
+    "scope": "all",
+    "file": "NC-CAT-006_Danh_muc_hang_hoa_van_phong_pham_v1.1.docx",
+    "source_sha256": "c12d2db984d4d0c8a9921ff0f3a7648dba2576009c8cb211b46a934732b38bd7",
+    "sha256": "9df2826558e230924acc5cf40aa913493d74349cbc27953f92ad1f655a216c92"
+  },
+  {
+    "id": "974601a0-f1df-42b7-9c94-e543692e9fbd",
+    "code": "NC-CAT-007",
+    "title": "Danh mục hàng hóa thiết bị hội nghị",
+    "scope": "all",
+    "file": "NC-CAT-007_Danh_muc_hang_hoa_thiet_bi_hoi_nghi_v1.1.docx",
+    "source_sha256": "29480fcfcc6d4bb68a747a20c0337e588a2ae8746494453e35202bca17af927a",
+    "sha256": "afe6c75688fb5676376c10d7052bffd27f0447e2123c7fbf5791d717d1676734"
+  },
+  {
+    "id": "9ab401b5-cb36-46eb-a5a2-3595aeb6fbd1",
+    "code": "NC-CAT-008",
+    "title": "Danh mục hàng hóa thiết bị lưu trữ",
+    "scope": "all",
+    "file": "NC-CAT-008_Danh_muc_hang_hoa_thiet_bi_luu_tru_v1.1.docx",
+    "source_sha256": "a14f15523a83d11d539c0c9b27015b6c9d56dbf854c6aa70c6ed6236b597dfa7",
+    "sha256": "55b788f065c0e32f44ed47dad5b1aae781645d007be998ed882f166cda740881"
+  },
+  {
+    "id": "c60cb712-1379-410d-8c72-d044651cdc9d",
+    "code": "NC-DQ-001",
+    "title": "Quy định quản lý chất lượng dữ liệu nghiệp vụ",
+    "scope": "all",
+    "file": "NC-DQ-001_Quy_dinh_quan_ly_chat_luong_du_lieu_nghiep_vu_v1.1.docx",
+    "source_sha256": "c92b51ba411e132c8b6f2f0ba1a867c479271c5c57119c13181b51dfbf99013b",
+    "sha256": "1a5228aafe26da4860afb5e4c66d33222924313db1d340f26bf4fdb53743bd7e"
+  },
+  {
+    "id": "604051de-f281-4b83-acac-3971332bbc62",
+    "code": "NC-FIN-001",
+    "title": "Hướng dẫn lập và đọc báo cáo doanh thu",
+    "scope": "Manager",
+    "file": "NC-FIN-001_Huong_dan_lap_va_doc_bao_cao_doanh_thu_v1.1.docx",
+    "source_sha256": "f925e5ea05612cd6efdb03a5e8a0bc5a69652675be29a3dfdbfdc44f2d1c0d58",
+    "sha256": "f531860e4ba4660288fff4fed8f1f89a6b44bf4d01287dcba7d3d7db4e221fac"
+  },
+  {
+    "id": "0e6a97ca-8781-4e66-9ffb-1ce7a09908c7",
+    "code": "NC-FIN-002",
+    "title": "Quy trình đối soát và chốt số liệu cuối kỳ",
+    "scope": "Manager",
+    "file": "NC-FIN-002_Quy_trinh_doi_soat_va_chot_so_lieu_cuoi_ky_v1.1.docx",
+    "source_sha256": "9e2c0fa010cfb507ac03863b4395135bb14a4f2594d3bbd62f2e62f5d7790ced",
+    "sha256": "548331a039088c7b28a1be70d90f32a9007c19d6956173a04156e8e26a8a8b11"
+  },
+  {
+    "id": "997e1cfa-c63d-43c9-8031-efc093d86d33",
+    "code": "NC-HR-001",
+    "title": "Quy trình tiếp nhận nhân viên mới",
+    "scope": "all",
+    "file": "NC-HR-001_Quy_trinh_tiep_nhan_nhan_vien_moi_v1.1.docx",
+    "source_sha256": "d4fc434b42ff3a31e2c3c5c60c1ac357020475bdafe5999a7dc7708617b9ea04",
+    "sha256": "1e9fa91e911b95eeeac378219ad705206e9439f92e49465412107659d138741b"
+  },
+  {
+    "id": "0279f7fa-26e4-49f9-8036-a13a522851a0",
+    "code": "NC-HR-002",
+    "title": "Quy trình đăng ký nghỉ và bàn giao công việc",
+    "scope": "all",
+    "file": "NC-HR-002_Quy_trinh_dang_ky_nghi_va_ban_giao_cong_viec_v1.1.docx",
+    "source_sha256": "7777ef844721a83bca437f899918bdf820aa62e4f4ea372502b203fa18ffeb8f",
+    "sha256": "45083162e7d5eb8b428175647fe80afdf36e0bb771ae80eeafc5b42ce694eaa7"
+  },
+  {
+    "id": "83de89fc-53d6-40b3-ad21-aa79dc7aebd0",
+    "code": "NC-IT-001",
+    "title": "Quy định sử dụng tài khoản và bảo vệ dữ liệu",
+    "scope": "all",
+    "file": "NC-IT-001_Quy_dinh_su_dung_tai_khoan_va_bao_ve_du_lieu_v1.1.docx",
+    "source_sha256": "78907c41a0c35bd9b2f3c17d35338f1053dd5e0fdb0e14b85a90935a30118248",
+    "sha256": "b17c96ccb08f0aed27b8e65ed03d9855c5ac870c8b17de68015333f0d5e03e36"
+  },
+  {
+    "id": "2b1d9c33-903d-4d29-b096-1ebb71dbf9a9",
+    "code": "NC-IT-002",
+    "title": "Quy trình cấp quyền và quản lý vòng đời tài khoản",
+    "scope": "Admin",
+    "file": "NC-IT-002_Quy_trinh_cap_quyen_va_quan_ly_vong_doi_tai_khoan_v1.1.docx",
+    "source_sha256": "2119dd1e07964d6b2bef4ab3a7f041ce208f90f98847d8d30bd7b4841fae5925",
+    "sha256": "8ec09660be3d559def6dca24c1b242320aec17b4e9e239ad42897aa7d9aea9e4"
+  },
+  {
+    "id": "4cad5933-c7ad-4e5c-89ce-f4ad0f2aff60",
+    "code": "NC-IT-003",
+    "title": "Quy trình sao lưu và khôi phục dữ liệu",
+    "scope": "Admin",
+    "file": "NC-IT-003_Quy_trinh_sao_luu_va_khoi_phuc_du_lieu_v1.1.docx",
+    "source_sha256": "f42b456fda68e85eeac3f0ba3e47b407afe9c3dff5bba29ff3858b81215f7c10",
+    "sha256": "ddd5245bc30d6df0eef1e48eee63028c12834fb633024a19012b8d3b824840e8"
+  },
+  {
+    "id": "16e0ecd3-fef0-4e24-a3f5-29186a6b2df4",
+    "code": "NC-OPS-001",
+    "title": "Quy trình chuẩn bị và bàn giao hàng hóa",
+    "scope": "all",
+    "file": "NC-OPS-001_Quy_trinh_chuan_bi_va_ban_giao_hang_hoa_v1.1.docx",
+    "source_sha256": "78b56f681f00018834302d8fa1a7bbc40af9051eddd63f737142461aa3e57907",
+    "sha256": "e2dffbc1d9b5a3510cfab07d88551231b43e127e3c92ec9abce1562e0a5cfa16"
+  },
+  {
+    "id": "055ba2cb-eea3-4159-ab90-552cc60d455b",
+    "code": "NC-OPS-002",
+    "title": "Quy trình bàn giao và theo dõi thiết bị nội bộ",
+    "scope": "Manager",
+    "file": "NC-OPS-002_Quy_trinh_ban_giao_va_theo_doi_thiet_bi_noi_bo_v1.1.docx",
+    "source_sha256": "6a26b74550ef6e1adbbaf3d9b8db8384e90bd98b069a4a34661904af24cf2f64",
+    "sha256": "2e9092fc231e3340041be36b833f2db44180235548813c5586221c7846c3e080"
+  },
+  {
+    "id": "0eb31a47-8f4f-4653-a697-b203acf65590",
+    "code": "NC-ORG-001",
+    "title": "Sổ tay cơ cấu và phối hợp vận hành",
+    "scope": "all",
+    "file": "NC-ORG-001_So_tay_co_cau_va_phoi_hop_van_hanh_v1.1.docx",
+    "source_sha256": "44386bd938401b12b085cad744869788253c52be84455f81063ccd2f554aed66",
+    "sha256": "c33bc18b757ab320ce9424a643e862a2c789d37b2aa88999e5d6a14dd32316e6"
+  },
+  {
+    "id": "fbfc49b3-45ce-43ff-a3ea-6eea2214ea7b",
+    "code": "NC-SAL-001",
+    "title": "Quy trình tiếp nhận và ghi nhận bán hàng",
+    "scope": "all",
+    "file": "NC-SAL-001_Quy_trinh_tiep_nhan_va_ghi_nhan_ban_hang_v1.1.docx",
+    "source_sha256": "2137099f570a88153f0a3fa0e5d39b01ad782b4d9a8a20f61e20b4c8322072ac",
+    "sha256": "f8976a923b24f3f10ea482822ac135451d76316af1b0ca11a92136db94fc449c"
+  },
+  {
+    "id": "d690d16e-e243-4281-8fef-aebf2e6b2441",
+    "code": "NC-SAL-002",
+    "title": "Quy trình báo giá và quản lý danh mục",
+    "scope": "Manager",
+    "file": "NC-SAL-002_Quy_trinh_bao_gia_va_quan_ly_danh_muc_v1.1.docx",
+    "source_sha256": "8d9fa06fa6dd66624695017bfb04fab0f5c1d0601fee1ff5cecb938a5bf29f9e",
+    "sha256": "bfe25b9ca2d734e4f8cbead21b58f575746d06db5d5eadf02cd5bffdb8499f2f"
+  },
+  {
+    "id": "104d1b61-0627-4af4-9b48-79d997a02e90",
+    "code": "NC-SAL-003",
+    "title": "Quy trình tiếp nhận đổi trả và khiếu nại",
+    "scope": "all",
+    "file": "NC-SAL-003_Quy_trinh_tiep_nhan_doi_tra_va_khieu_nai_v1.1.docx",
+    "source_sha256": "b1e63969781a555b0b6ea5f421a7bd88111ee094b24b81d7f0c10136166bba8f",
+    "sha256": "5030170799768dbb1a6406e67cbcf8e8859b8ff9233a7ce66f03ee6bf6f3498b"
+  },
+  {
+    "id": "4b05171d-b725-485c-b2c7-b41e6e1e51ed",
+    "code": "NC-WH-001",
+    "title": "Quy trình nhập kho và kiểm đếm hàng hóa",
+    "scope": "all",
+    "file": "NC-WH-001_Quy_trinh_nhap_kho_va_kiem_dem_hang_hoa_v1.1.docx",
+    "source_sha256": "911e9b42c9c30ba1346752f576268471609b8a329cc21e932bc8b30afa50cd61",
+    "sha256": "d7ebd2a56743e10678d0e554ee0d137491c8e0c2e687349d7136151365d36b93"
+  },
+  {
+    "id": "16dd9a61-1a02-4697-8c14-3898fc9e89cc",
+    "code": "NC-WH-002",
+    "title": "Quy trình theo dõi tồn kho và bổ sung hàng",
+    "scope": "Manager",
+    "file": "NC-WH-002_Quy_trinh_theo_doi_ton_kho_va_bo_sung_hang_v1.1.docx",
+    "source_sha256": "7078ca069f1d80ccf4acaa225a6d2437e3291a77cb359a64d1cd3e773f9e1d1b",
+    "sha256": "cddef7240216b73bd7a6c50b05990d1bb5943b0d29968ff14d6148b739b1b18a"
+  },
+  {
+    "id": "b417dc59-1c15-441f-b018-ba719c214ffa",
+    "code": "NC-WH-003",
+    "title": "Quy trình kiểm kê và xử lý chênh lệch tồn kho",
+    "scope": "all",
+    "file": "NC-WH-003_Quy_trinh_kiem_ke_va_xu_ly_chenh_lech_ton_kho_v1.1.docx",
+    "source_sha256": "a4d7c59a6fd2dd2a486d4ff606a41fa74d98e634a7522507616762443bfa73e5",
+    "sha256": "a1ff5b6f11116d6ea655074a7a0c5c4a4695c771259aa5bf5d0339ac1eecbc94"
+  }
+]

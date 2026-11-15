@@ -1,0 +1,63 @@
+# Isolated integration stack. Does not read .env or call external AI providers.
+name: apbwas-review
+x-test-env: &test-env
+  DATABASE_URL: postgresql+psycopg://apbwas_test:local-test-only@postgres:5432/apbwas_test
+  REDIS_URL: redis://redis:6379/0
+  DEMO_MODE: "true"
+  SAMPLE_DATA: "true"
+  EMBEDDING_PROVIDER: lexical
+  AUDIT_KEY: isolated-test-audit-key-not-for-production
+  UPLOAD_DIR: /app/uploads
+  FRONTEND_ORIGIN: http://localhost:4181
+  # Isolated test-only Fernet key. Production keys stay in ignored .env.
+  LLM_ENCRYPTION_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: apbwas_test
+      POSTGRES_PASSWORD: local-test-only
+      POSTGRES_DB: apbwas_test
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U apbwas_test -d apbwas_test"]
+      interval: 2s
+      retries: 30
+  redis:
+    image: redis:7.4-alpine
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 2s
+      retries: 30
+  init:
+    build: ./backend
+    environment: *test-env
+    command: sh -c "alembic upgrade head && python -m app.persist_files && python -m app.seed && python -m app.business_data_pack --as-of 2026-11-02 && python -m app.seed_product_media && python -m app.seed_finance_sample"
+    volumes: [test_uploads:/app/uploads]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+  backend:
+    build: ./backend
+    environment: *test-env
+    volumes: [test_uploads:/app/uploads]
+    depends_on:
+      init: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health/ready',timeout=3)"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+  worker:
+    build: ./backend
+    environment: *test-env
+    command: python -m app.worker
+    volumes: [test_uploads:/app/uploads]
+    depends_on:
+      init: {condition: service_completed_successfully}
+  frontend:
+    build: .
+    ports: ["127.0.0.1:4181:80"]
+    depends_on:
+      backend: {condition: service_healthy}
+volumes:
+  test_uploads:

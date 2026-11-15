@@ -1,0 +1,15 @@
+# Agent LLM điều phối tác vụ trong Connected Mode — 08/11/2026
+
+Connected Mode gọi model đã chọn để lập kế hoạch trước mọi yêu cầu nghiệp vụ hợp lệ: hỏi số liệu, tồn kho/giá, chính sách, tạo Word/Excel, nội dung Word được cung cấp sẵn, soạn/gắn tệp/mở lại email. Không còn chọn công cụ tự động bằng nhánh từ khóa ở Connected Mode. Các nhánh quy tắc chỉ phục vụ Demo Mode trong hệ thống thử nghiệm.
+
+Luồng thực thi: yêu cầu + kỳ chuẩn hóa + yêu cầu trước và metadata tệp cùng hội thoại → Agent LLM trả kế hoạch JSON → kiểm tra schema, công cụ, quyền và hạn mức → công cụ đọc database/tính toán/tạo tệp hoặc bản nháp → kết quả kiểm chứng và phần diễn giải AI nếu áp dụng. Model không nhận mật khẩu database hoặc khóa API. Backend vẫn tính số, kiểm tra kết quả và dùng trình tạo DOCX/XLSX; dữ liệu mô phỏng đang lưu trong database không tự biến thành dữ liệu doanh nghiệp thật khi đổi cách điều phối.
+
+Agent riêng chỉ thấy công cụ bật trong cấu hình đã ghim; trợ lý mặc định có allowlist theo quyền hiện tại. Các công cụ bị tắt bởi quản trị bị loại khỏi allowlist. Công cụ ghi trực tiếp tồn kho không cho planner gọi; cập nhật kho và gửi thư vẫn qua cơ chế xác nhận/phê duyệt hiện có. Metadata tệp đưa vào ngữ cảnh cũng được kiểm tra lại quyền nguồn.
+
+Nếu bước lập kế hoạch gặp 429, timeout, JSON sai hoặc hết quota thì workflow thất bại và chưa chạy công cụ, không chuyển sang báo cáo mẫu. Nếu công cụ đã chạy thành công nhưng bước diễn giải sau đó lỗi, giữ kết quả công cụ và báo rõ thiếu phần diễn giải. Nút UI như tải tệp hoặc mở trang email không cần gọi model; lệnh ngôn ngữ tự nhiên để mở lại email đi qua Agent.
+
+workflow.result.execution_mode ghi llm_agent hoặc demo, planner_tokens ghi usage nhà cung cấp trả về. UI kế hoạch có mục “Luồng xử lý: Agent LLM / Demo / Lịch sử”. Workflow lịch sử và kế hoạch đã thực thi không tự viết lại; yêu cầu mới sau triển khai dùng luồng mới. Nhà cung cấp không trả usage có thể khiến token hiển thị bằng không dù đã gọi API; execution_mode và audit kế hoạch là bằng chứng luồng, không suy luận chỉ từ số token.
+
+Kiểm thử: 214 backend đạt. Có chín dạng yêu cầu xác minh luôn tới planner và tôn trọng model/allowlist được chọn; ca 429 xác minh không có GeneratedFile hoặc ToolExecution; tài chính chuẩn hóa tháng được chuyển tới model; soạn/mở email và Word có nội dung cho sẵn đều qua planner; quota/token và phân quyền vẫn được kiểm tra. Kiểm thử provider dùng mock, không tự gửi dữ liệu tài chính ra ngoài và không gửi email thật.
+
+Người dùng đã xác nhận phạm vi egress trước triển khai: câu hỏi mới, câu hỏi trước trong cùng chat, tháng, tên/loại tệp và schema công cụ tới model đang cấu hình; kết quả công cụ được cấp quyền để diễn giải; không đưa mật khẩu DB/API key vào nội dung. Sau triển khai, health cổng 4180 HTTP 200. Một lượt probe Intern AI thật chỉ gửi câu “Kiểm tra sản phẩm sắp hết hàng.” và allowlist get_inventory_status: model trả đúng công cụ, không hỏi làm rõ, usage 2.209 token. Probe không thực thi công cụ, không truy vấn dữ liệu công ty và không gửi email. Bốn kịch bản UI Word/Excel/email/xóa chat và nhãn Demo/luồng xử lý đạt; build frontend thành công.

@@ -1,0 +1,1617 @@
+{
+  "summary": {
+    "tables": 26,
+    "columns": 178,
+    "foreign_keys": 27
+  },
+  "tables": [
+    {
+      "name": "audit_logs",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "actor",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "event",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "resource",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "correlation_id",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "payload",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "previous_hash",
+          "type": "VARCHAR(64)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "hash",
+          "type": "VARCHAR(64)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "jobs",
+      "columns": [
+        {
+          "name": "resource",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "kind",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "lease_until",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "permissions",
+      "columns": [
+        {
+          "name": "name",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "products",
+      "columns": [
+        {
+          "name": "sku",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(120)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "category",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "price",
+          "type": "NUMERIC(15, 0)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "active",
+          "type": "BOOLEAN",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "version",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "roles",
+      "columns": [
+        {
+          "name": "name",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "permissions",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "system_settings",
+      "columns": [
+        {
+          "name": "key",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "value",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "inventory",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": [
+            "products.id"
+          ]
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "threshold",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "version",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "sales",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "products.id"
+          ]
+        },
+        {
+          "name": "date",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "quantity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "revenue",
+          "type": "NUMERIC(15, 0)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "reference",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "email",
+          "type": "VARCHAR(180)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(120)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "password_hash",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "role",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "roles.name"
+          ]
+        },
+        {
+          "name": "active",
+          "type": "BOOLEAN",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "phone",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "department",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "job_title",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "preferences",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "must_change_password",
+          "type": "BOOLEAN",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "last_login_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "account_tokens",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "token_hash",
+          "type": "VARCHAR(64)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "purpose",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "expires_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "used_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "auth_sessions",
+      "columns": [
+        {
+          "name": "token_hash",
+          "type": "VARCHAR(64)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "expires_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "device",
+          "type": "VARCHAR(250)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "ip_address",
+          "type": "VARCHAR(64)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "conversations",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(120)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "context",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "documents",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(250)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "scope",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "path",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "chunks",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "error",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "inventory_movements",
+      "columns": [
+        {
+          "name": "product_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "products.id"
+          ]
+        },
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "reference",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "before",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "after",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "reason",
+          "type": "VARCHAR(250)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "document_chunks",
+      "columns": [
+        {
+          "name": "document_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "documents.id"
+          ]
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "page",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "position",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "embedding",
+          "type": "VECTOR(384)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "model",
+          "type": "VARCHAR(120)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "document_files",
+      "columns": [
+        {
+          "name": "document_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": [
+            "documents.id"
+          ]
+        },
+        {
+          "name": "content",
+          "type": "BYTEA",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "messages",
+      "columns": [
+        {
+          "name": "conversation_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "conversations.id"
+          ]
+        },
+        {
+          "name": "role",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "content",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "workflows",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "conversation_id",
+          "type": "VARCHAR(36)",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "conversations.id"
+          ]
+        },
+        {
+          "name": "request",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "plan",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "result",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "error",
+          "type": "TEXT",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "checkpoint",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "tokens",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "duration_ms",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "cancel_requested",
+          "type": "BOOLEAN",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "idempotency_key",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "deadline",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "approval_requests",
+      "columns": [
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "tool",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "arguments",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "revision",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "approved_revision",
+          "type": "INTEGER",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "expires_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "reason",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "kind",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "read_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": true,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "reports",
+      "columns": [
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(200)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "type",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "data",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "tool_executions",
+      "columns": [
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "position",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "tool",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "arguments",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "output",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "duration_ms",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "usage_records",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "tokens",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "workflow_events",
+      "columns": [
+        {
+          "name": "sequence",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": true,
+          "foreign_keys": []
+        },
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "type",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "payload",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "workflow_steps",
+      "columns": [
+        {
+          "name": "workflow_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "workflows.id"
+          ]
+        },
+        {
+          "name": "position",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "tool",
+          "type": "VARCHAR(80)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "status",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "output",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    },
+    {
+      "name": "approval_decisions",
+      "columns": [
+        {
+          "name": "approval_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "approval_requests.id"
+          ]
+        },
+        {
+          "name": "user_id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": [
+            "users.id"
+          ]
+        },
+        {
+          "name": "revision",
+          "type": "INTEGER",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "decision",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "reason",
+          "type": "TEXT",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "arguments",
+          "type": "JSON",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "id",
+          "type": "VARCHAR(36)",
+          "nullable": false,
+          "primary_key": true,
+          "unique": false,
+          "foreign_keys": []
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP WITH TIME ZONE",
+          "nullable": false,
+          "primary_key": false,
+          "unique": false,
+          "foreign_keys": []
+        }
+      ]
+    }
+  ]
+}

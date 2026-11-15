@@ -21,6 +21,10 @@ class UserEdit(StrictModel):
 
 class Profile(StrictModel):
     name: str = Field(min_length=2, max_length=120)
+    delivery_email: str = Field(default='',max_length=180,pattern=r'^(?:[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+)?$')
+    phone: str = Field(default='',max_length=30)
+    department: str = Field(default='',max_length=100)
+    job_title: str = Field(default='',max_length=100)
 
 class ChangePassword(StrictModel):
     current_password: str
@@ -29,9 +33,25 @@ class ChangePassword(StrictModel):
 class RequestWorkflow(StrictModel):
     request: str = Field(min_length=3,max_length=4000)
     conversation_id: str | None = None
+    model: str | None = Field(default=None,max_length=256)
     idempotency_key: str = Field(min_length=10,max_length=100)
 
+class FileFormula(StrictModel):
+    cell:str=Field(pattern=r'^[A-T][1-9]\d{0,3}$')
+    expression:str=Field(min_length=1,max_length=500)
+
 class ToolArgs(StrictModel):
+    date: str | None=Field(default=None,pattern=r'^\d{4}-\d{2}-\d{2}$')
+    order_status: Literal['pending','confirmed','shipping','delivered','cancelled','returned','unfinished'] | None=None
+    title:str | None=Field(default=None,max_length=180)
+    source:Literal['custom','finance','inventory','products','knowledge'] | None=None
+    columns:list[str] | None=Field(default=None,max_length=20)
+    rows:list[list[str | int | float | bool | None]] | None=Field(default=None,max_length=1000)
+    formulas:list[FileFormula] | None=Field(default=None,max_length=500)
+    subject: str | None = Field(default=None,max_length=180)
+    body_text: str | None = Field(default=None,max_length=20000)
+    recipient_ids: list[str] | None = Field(default=None,max_length=100)
+    low_stock: bool = False
     month: str | None = Field(default=None,pattern=r'^\d{4}-(0[1-9]|1[0-2])$')
     query: str | None = Field(default=None,max_length=1000)
     product_id: str | None = None

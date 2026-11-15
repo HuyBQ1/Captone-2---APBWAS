@@ -15,6 +15,8 @@ def tick():
             db.add(heartbeat)
         heartbeat.value={'at':now().isoformat()}
         db.commit()
+        from .shop_connection import sync_if_due
+        sync_if_due(db)
         # Expire approval requests even when nobody opens the UI.
         expired=db.scalars(select(Approval).where(Approval.status=='pending',Approval.expires_at<=now()).with_for_update(skip_locked=True)).all()
         for approval in expired:
@@ -37,6 +39,12 @@ def tick():
             if job.kind=='workflow':
                 wf=db.get(Workflow,job.resource)
                 process(db,wf)
+            elif job.kind=='mail':
+                from .mail_campaigns import process_mail
+                process_mail(db,job)
+            elif job.kind=='account_email':
+                from .public_accounts import process_email
+                process_email(db,job)
             else:
                 doc=db.get(Document,job.resource)
                 if doc:
@@ -47,6 +55,20 @@ def tick():
             db.rollback()
             job=db.get(Job,job.id)
             job.status='failed'
+            if job.kind=='mail':
+                from .models import MailCampaign,MailDelivery
+                campaign=db.get(MailCampaign,job.resource)
+                if campaign:
+                    campaign.status='failed';campaign.error='Worker bị gián đoạn. Kiểm tra trạng thái từng người và Thư đã gửi trước khi tạo đợt mới.'
+                    for delivery in db.scalars(select(MailDelivery).where(MailDelivery.campaign_id==campaign.id)):
+                        if delivery.status=='sending':delivery.status='unknown'
+                        elif delivery.status=='pending':delivery.status='skipped';delivery.error='Đợt gửi bị gián đoạn trước khi gửi thư này.'
+            if job.kind=='account_email':
+                from .models import AccountEmail
+                delivery=db.get(AccountEmail,job.resource)
+                if delivery:
+                    delivery.status='unknown' if delivery.status in ('preparing','sending') else 'failed'
+                    delivery.payload_ciphertext='';delivery.error='Gửi thư bị gián đoạn; có thể yêu cầu liên kết mới.'
             doc=db.get(Document,job.resource) if job.kind=='document' else None
             if doc:
                 doc.status='failed'

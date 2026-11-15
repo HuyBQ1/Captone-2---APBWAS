@@ -1,0 +1,23 @@
+{
+  "dataset": "nova-commerce-business-v1",
+  "synthetic": true,
+  "as_of": "2026-11-02",
+  "from": "2026-01-01",
+  "currency": "VND",
+  "counts": {
+    "products": 48,
+    "sales": 3408,
+    "movements": 3888,
+    "documents": 26,
+    "reports": 11,
+    "low_stock_products": 8,
+    "out_of_stock_products": 4
+  },
+  "imported_sales_revenue_vnd": 25862032000,
+  "rules": [
+    "Existing records preserved.",
+    "Sales and stock movements reconciled for NCV1 only.",
+    "Reports include existing sales plus NCV1.",
+    "No external AI calls."
+  ]
+}

@@ -1,4 +1,14 @@
-# Báo cáo kiểm tra thực tế — 14/10/2026 (Asia/Saigon)
+# Kiểm chứng mới nhất — 02/11/2026
+
+**Mốc bổ sung dữ liệu doanh nghiệp NCV1:** 89 backend tests và 15 Playwright tests đạt. Database chính sau nhập có 56 sản phẩm, 3.552 sale, 29 tài liệu và 21 báo cáo; đối soát sale/ledger và chuỗi tồn đều không sai lệch. Xem [bộ dữ liệu Nova Commerce](novacommerce-business-data.md) và [manifest](novacommerce-data-manifest.json). Các mốc 86/14 và 73/10 bên dưới là các giai đoạn trước.
+
+**Bản doanh nghiệp tiếp theo đã hoàn thành:** 86 backend tests và 14 Playwright tests đạt, schema 0003 gồm 26 bảng. Đã kiểm tra restart giữ dữ liệu/session/file gốc; cấp ba tài khoản Nova Commerce, bắt buộc đổi mật khẩu và vô hiệu tài khoản mẫu. Xem [hướng dẫn và kết quả doanh nghiệp](enterprise-guide.md), [bằng chứng persistence](enterprise-persistence.json) và [schema mới](database-design/enterprise/README.md). Kết quả 73/10 bên dưới là mốc rà soát trước khi bổ sung tính năng doanh nghiệp.
+
+Xem [báo cáo rà soát 02/11/2026](project-review-2026-11-02.md): **73 backend tests passed trên PostgreSQL, 10 Playwright tests passed**, build đạt, npm/pip audit không còn advisory đã biết. Docker, migration, HNSW, concurrency và benchmark 10.000 chunks đã được kiểm chứng; ứng dụng chính đã cập nhật tại cổng 4180. Chi tiết phạm vi và giới hạn nằm trong báo cáo mới.
+
+Phần dưới giữ lại kết quả lịch sử. Các ghi chú Docker chưa chạy/PG test skip chỉ mô tả ngày 14/10, không còn là trạng thái hiện tại.
+
+# Lịch sử kiểm tra — 14/10/2026 (Asia/Saigon)
 
 ## Môi trường
 

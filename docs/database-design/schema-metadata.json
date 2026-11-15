@@ -1,0 +1,1627 @@
+[
+  {
+    "name": "audit_logs",
+    "columns": [
+      {
+        "name": "id",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      },
+      {
+        "name": "actor",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "event",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "resource",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "correlation_id",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "payload",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "previous_hash",
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "hash",
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_audit_logs_correlation_id ON audit_logs (correlation_id)",
+      "CREATE INDEX ix_audit_logs_created_at ON audit_logs (created_at)",
+      "CREATE INDEX ix_audit_logs_event ON audit_logs (event)"
+    ]
+  },
+  {
+    "name": "jobs",
+    "columns": [
+      {
+        "name": "resource",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "kind",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "queued",
+        "fks": []
+      },
+      {
+        "name": "lease_until",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (resource)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_jobs_created_at ON jobs (created_at)",
+      "CREATE INDEX ix_jobs_status ON jobs (status)"
+    ]
+  },
+  {
+    "name": "permissions",
+    "columns": [
+      {
+        "name": "name",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": null,
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": []
+  },
+  {
+    "name": "products",
+    "columns": [
+      {
+        "name": "sku",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(120)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "price",
+        "type": "NUMERIC(15, 0)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (sku)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_products_created_at ON products (created_at)"
+    ]
+  },
+  {
+    "name": "roles",
+    "columns": [
+      {
+        "name": "name",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "permissions",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": []
+  },
+  {
+    "name": "system_settings",
+    "columns": [
+      {
+        "name": "key",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "value",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": []
+  },
+  {
+    "name": "inventory",
+    "columns": [
+      {
+        "name": "product_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "products.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "quantity",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "threshold",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "20",
+        "fks": []
+      },
+      {
+        "name": "version",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "1",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "CHECK (quantity >= 0)"
+    ],
+    "indexes": []
+  },
+  {
+    "name": "sales",
+    "columns": [
+      {
+        "name": "product_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "products.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "date",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "quantity",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "revenue",
+        "type": "NUMERIC(15, 0)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_sales_created_at ON sales (created_at)",
+      "CREATE INDEX ix_sales_date ON sales (date)",
+      "CREATE INDEX ix_sales_product_id ON sales (product_id)"
+    ]
+  },
+  {
+    "name": "users",
+    "columns": [
+      {
+        "name": "email",
+        "type": "VARCHAR(180)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(120)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "password_hash",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "role",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "roles.name",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "active",
+        "type": "BOOLEAN",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "True",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (email)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_users_created_at ON users (created_at)"
+    ]
+  },
+  {
+    "name": "auth_sessions",
+    "columns": [
+      {
+        "name": "token_hash",
+        "type": "VARCHAR(64)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "expires_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (token_hash)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_auth_sessions_created_at ON auth_sessions (created_at)",
+      "CREATE INDEX ix_auth_sessions_user_id ON auth_sessions (user_id)"
+    ]
+  },
+  {
+    "name": "conversations",
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(120)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "context",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_conversations_created_at ON conversations (created_at)",
+      "CREATE INDEX ix_conversations_user_id ON conversations (user_id)"
+    ]
+  },
+  {
+    "name": "documents",
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(250)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "uploaded",
+        "fks": []
+      },
+      {
+        "name": "scope",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "all",
+        "fks": []
+      },
+      {
+        "name": "path",
+        "type": "TEXT",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "content",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "",
+        "fks": []
+      },
+      {
+        "name": "chunks",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "0",
+        "fks": []
+      },
+      {
+        "name": "error",
+        "type": "TEXT",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_documents_created_at ON documents (created_at)",
+      "CREATE INDEX ix_documents_status ON documents (status)"
+    ]
+  },
+  {
+    "name": "document_chunks",
+    "columns": [
+      {
+        "name": "document_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "documents.id",
+            "ondelete": "CASCADE"
+          }
+        ]
+      },
+      {
+        "name": "content",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "page",
+        "type": "INTEGER",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "position",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "embedding",
+        "type": "VECTOR(384)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "model",
+        "type": "VARCHAR(120)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_document_chunks_created_at ON document_chunks (created_at)",
+      "CREATE INDEX ix_document_chunks_document_id ON document_chunks (document_id)",
+      "CREATE INDEX ix_document_chunks_model ON document_chunks (model)"
+    ]
+  },
+  {
+    "name": "messages",
+    "columns": [
+      {
+        "name": "conversation_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "conversations.id",
+            "ondelete": "CASCADE"
+          }
+        ]
+      },
+      {
+        "name": "role",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "content",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_messages_conversation_id ON messages (conversation_id)",
+      "CREATE INDEX ix_messages_created_at ON messages (created_at)"
+    ]
+  },
+  {
+    "name": "workflows",
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "conversation_id",
+        "type": "VARCHAR(36)",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "conversations.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "request",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "queued",
+        "fks": []
+      },
+      {
+        "name": "plan",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      },
+      {
+        "name": "result",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      },
+      {
+        "name": "error",
+        "type": "TEXT",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "checkpoint",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "0",
+        "fks": []
+      },
+      {
+        "name": "tokens",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "0",
+        "fks": []
+      },
+      {
+        "name": "duration_ms",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "0",
+        "fks": []
+      },
+      {
+        "name": "cancel_requested",
+        "type": "BOOLEAN",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "False",
+        "fks": []
+      },
+      {
+        "name": "idempotency_key",
+        "type": "VARCHAR(100)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "deadline",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (idempotency_key)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_workflows_created_at ON workflows (created_at)",
+      "CREATE INDEX ix_workflows_status ON workflows (status)",
+      "CREATE INDEX ix_workflows_user_id ON workflows (user_id)"
+    ]
+  },
+  {
+    "name": "approval_requests",
+    "columns": [
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "pending",
+        "fks": []
+      },
+      {
+        "name": "tool",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "apply_approved_inventory_adjustment",
+        "fks": []
+      },
+      {
+        "name": "arguments",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "revision",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "1",
+        "fks": []
+      },
+      {
+        "name": "approved_revision",
+        "type": "INTEGER",
+        "nullable": true,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "expires_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "reason",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "Hành động ghi thay đổi tồn kho cần phê duyệt.",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (workflow_id)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_approval_requests_created_at ON approval_requests (created_at)",
+      "CREATE INDEX ix_approval_requests_status ON approval_requests (status)"
+    ]
+  },
+  {
+    "name": "reports",
+    "columns": [
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(200)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "type",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "revenue",
+        "fks": []
+      },
+      {
+        "name": "data",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (workflow_id)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_reports_created_at ON reports (created_at)",
+      "CREATE INDEX ix_reports_user_id ON reports (user_id)"
+    ]
+  },
+  {
+    "name": "tool_executions",
+    "columns": [
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "position",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "tool",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "arguments",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "output",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "duration_ms",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (workflow_id, position)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_tool_executions_created_at ON tool_executions (created_at)",
+      "CREATE INDEX ix_tool_executions_workflow_id ON tool_executions (workflow_id)"
+    ]
+  },
+  {
+    "name": "usage_records",
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "tokens",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "0",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (workflow_id)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_usage_records_created_at ON usage_records (created_at)",
+      "CREATE INDEX ix_usage_records_user_id ON usage_records (user_id)"
+    ]
+  },
+  {
+    "name": "workflow_events",
+    "columns": [
+      {
+        "name": "sequence",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": true,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "type",
+        "type": "VARCHAR(50)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "payload",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_workflow_events_created_at ON workflow_events (created_at)",
+      "CREATE UNIQUE INDEX ix_workflow_events_sequence ON workflow_events (sequence)",
+      "CREATE INDEX ix_workflow_events_workflow_id ON workflow_events (workflow_id)"
+    ]
+  },
+  {
+    "name": "workflow_steps",
+    "columns": [
+      {
+        "name": "workflow_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "workflows.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "position",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "tool",
+        "type": "VARCHAR(80)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(30)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "queued",
+        "fks": []
+      },
+      {
+        "name": "output",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [
+      "UNIQUE (workflow_id, position)"
+    ],
+    "indexes": [
+      "CREATE INDEX ix_workflow_steps_created_at ON workflow_steps (created_at)",
+      "CREATE INDEX ix_workflow_steps_workflow_id ON workflow_steps (workflow_id)"
+    ]
+  },
+  {
+    "name": "approval_decisions",
+    "columns": [
+      {
+        "name": "approval_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "approval_requests.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "user_id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": [
+          {
+            "target": "users.id",
+            "ondelete": null
+          }
+        ]
+      },
+      {
+        "name": "revision",
+        "type": "INTEGER",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "decision",
+        "type": "VARCHAR(20)",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": null,
+        "fks": []
+      },
+      {
+        "name": "reason",
+        "type": "TEXT",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "",
+        "fks": []
+      },
+      {
+        "name": "arguments",
+        "type": "JSON",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "do ứng dụng tạo",
+        "fks": []
+      },
+      {
+        "name": "id",
+        "type": "VARCHAR(36)",
+        "nullable": false,
+        "pk": true,
+        "unique": false,
+        "default": "UUID v4",
+        "fks": []
+      },
+      {
+        "name": "created_at",
+        "type": "TIMESTAMP WITH TIME ZONE",
+        "nullable": false,
+        "pk": false,
+        "unique": false,
+        "default": "UTC hiện tại",
+        "fks": []
+      }
+    ],
+    "constraints": [],
+    "indexes": [
+      "CREATE INDEX ix_approval_decisions_approval_id ON approval_decisions (approval_id)",
+      "CREATE INDEX ix_approval_decisions_created_at ON approval_decisions (created_at)"
+    ]
+  }
+]

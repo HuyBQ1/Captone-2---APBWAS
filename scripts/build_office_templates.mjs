@@ -1,0 +1,17 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {pathToFileURL} from 'node:url';
+const runtime=createRequire(path.join(process.argv[2],'package.json'));
+const {Workbook,SpreadsheetFile}=await import(pathToFileURL(runtime.resolve('@oai/artifact-tool')).href);
+const book=Workbook.create(),sheet=book.worksheets.add('BangTinh');
+sheet.showGridLines=false;sheet.freezePanes.freezeRows(1);
+sheet.getRange('A:T').format.columnWidth=20;sheet.getRange('A:A').format.columnWidth=18;sheet.getRange('B:B').format.columnWidth=42;
+sheet.getRange('A1:T2').format.font={name:'Arial',size:11,color:'#182b42'};
+sheet.getRange('A1:T1').values=[Array.from({length:20},(_,i)=>'Cột '+(i+1))];
+sheet.getRange('A1:T1').format={fill:'#213952',font:{name:'Arial',size:11,bold:true,color:'#ffffff'},rowHeight:32,wrapText:true};
+sheet.getRange('A2:T2').values=[Array(20).fill(null)];
+sheet.getRange('A2:T2').format={rowHeight:24,wrapText:true,font:{name:'Arial',size:11,color:'#1560a6'}};
+sheet.getRange('A2:T2').setNumberFormat('#,##0.########;[Red](#,##0.########);0');
+const file=await SpreadsheetFile.exportXlsx(book);await file.save('backend/app/assets/office-template.xlsx');
+console.log('Office spreadsheet template saved.');

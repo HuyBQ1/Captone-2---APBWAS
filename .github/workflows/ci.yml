@@ -3,6 +3,19 @@ on: [push, pull_request]
 jobs:
   checks:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: apbwas_test
+          POSTGRES_PASSWORD: local-test-only
+          POSTGRES_DB: apbwas_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U apbwas_test -d apbwas_test"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      PG_TEST_DATABASE_URL: postgresql+psycopg://apbwas_test:local-test-only@localhost:5432/apbwas_test
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -13,6 +26,31 @@ jobs:
       - run: npm run build
       - run: npm audit --audit-level=high
       - run: pip install -r backend/requirements.lock
+      - name: Audit Python dependencies
+        run: |
+          pip install pip-audit==2.10.1
+          pip-audit -r backend/requirements.lock --no-deps --disable-pip
       - name: Run backend tests
         working-directory: backend
         run: python -m pytest tests -q
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Start isolated application
+        run: docker compose -f compose.test.yaml up -d --build
+      - name: Wait for application
+        run: python scripts/wait_for_app.py http://localhost:4181/api/health/ready
+      - name: Browser workflow tests
+        run: npm run test:e2e
+        env:
+          E2E_URL: http://localhost:4181
+      - name: Collect integration logs
+        if: failure()
+        run: docker compose -f compose.test.yaml logs --tail=120
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-test-results
+          path: test-results/
+      - name: Stop isolated stack
+        if: always()
+        run: docker compose -f compose.test.yaml down

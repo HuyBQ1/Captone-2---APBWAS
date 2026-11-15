@@ -21,6 +21,7 @@ class FakeCache:
     def expire(self,*args): pass
     def get(self,key): return self.values.get(key)
     def setex(self,key,ttl,value): self.values[key]=value
+    def delete(self,key): return int(self.values.pop(key,None) is not None)
     def ping(self): return True
 
 @pytest.fixture
@@ -37,6 +38,8 @@ def env(monkeypatch,tmp_path):
     monkeypatch.setattr(settings,'upload_dir',str(tmp_path/'uploads'))
     users={}
     with factory() as db:
+        from app.models import Workspace
+        db.add(Workspace(id='primary',name='Test workspace'));db.commit()
         for role,permissions in DEFAULT_PERMISSIONS.items(): db.add(Role(name=role,permissions=permissions))
         db.add(SystemSetting(key='limits',value=DEFAULT_CONFIG)); db.commit()
         password_hash=hasher.hash('Demo@123456')

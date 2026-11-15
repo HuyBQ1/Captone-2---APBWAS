@@ -26,13 +26,14 @@ Session = sessionmaker(engine, expire_on_commit=False)
 read_engine=create_engine(settings.agent_database_url,pool_pre_ping=True) if settings.agent_database_url else engine
 
 @contextmanager
-def read_only_db(db):
+def read_only_db(db, *, consistent_snapshot=False):
     if db.bind.dialect.name!='postgresql':
         # Test harness: SQL surface is still structured SELECT only.
         yield db
         return
     with sessionmaker(read_engine)() as reader:
-        reader.execute(text('SET TRANSACTION READ ONLY'))
+        reader.execute(text('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ, READ ONLY'
+                            if consistent_snapshot else 'SET TRANSACTION READ ONLY'))
         reader.execute(text("SET LOCAL statement_timeout = '2500ms'"))
         try:
             yield reader

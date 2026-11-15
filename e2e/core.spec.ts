@@ -1,9 +1,9 @@
 import {test,expect,Page} from '@playwright/test';
 async function login(page:Page,role='Manager'){
- await page.goto('/');
+ await page.goto('/login');
  await page.getByRole('button',{name:role,exact:true}).click();
  await page.getByRole('button',{name:'Đăng nhập',exact:true}).click();
- await expect(page.getByRole('heading',{name:/Chào/})).toBeVisible();
+ await expect(page.getByRole('heading',{name:/AI Workspace/})).toBeVisible();
 }
 test('revenue workflow, report and real CSV download',async({page})=>{
  await login(page);await page.goto('/workspace');
@@ -44,6 +44,7 @@ test('Employee denied finance and prompt injection audited',async({page})=>{
 });
 test('responsive shell, dark mode, all Admin routes render without console errors',async({page})=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await login(page,'Admin');
+ await page.request.put('/api/auth/preferences',{data:{theme:'light',sidebar_collapsed:false}});await page.reload();
  for(const route of ['/workflows','/reports','/knowledge','/data','/approvals','/audit','/admin','/account']){await page.goto(route);await expect(page.locator('main h1')).toBeVisible()}
  await page.getByRole('button',{name:'Chuyển giao diện sáng tối'}).click();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
  await page.setViewportSize({width:390,height:844});await page.goto('/');await page.getByRole('button',{name:'Mở menu'}).click();await expect(page.locator('.sidebar')).toBeVisible();await page.locator('.sidebar nav').getByTitle('AI Workspace').click();

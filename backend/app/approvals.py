@@ -1,6 +1,6 @@
 from sqlalchemy import select, update
 from fastapi import HTTPException
-from .models import Approval, ApprovalDecision, Inventory, Workflow, WorkflowStep, ToolExecution, SystemSetting, User, now
+from .models import Approval, ApprovalDecision, Inventory, InventoryMovement, Workflow, WorkflowStep, ToolExecution, SystemSetting, User, Message, now
 from .permissions import require
 from .audit import audit
 from .auth import utc
@@ -17,6 +17,9 @@ def decide(db,user,approval_id,body):
     if item.status!='pending' or item.revision!=body.revision:
         raise HTTPException(409,'Phê duyệt đã thay đổi hoặc đã được xử lý. Hãy tải lại.')
     wf=db.scalar(select(Workflow).where(Workflow.id==item.workflow_id).with_for_update())
+    if wf.agent_id:
+        from .agent_runtime import can_view_run
+        if not can_view_run(db,user,wf):raise HTTPException(404,'Không tìm thấy phê duyệt trong workspace của bạn.')
     if utc(item.expires_at)<=now():
         item.status='expired'
         wf.status='failed'
@@ -28,6 +31,7 @@ def decide(db,user,approval_id,body):
     if wf.status!='waiting_approval' or wf.cancel_requested:
         raise HTTPException(409,'Workflow không còn chờ phê duyệt.')
     inv=db.get(Inventory,item.arguments['product_id'])
+    if not inv:raise HTTPException(409,'Sản phẩm không còn dữ liệu tồn kho hợp lệ.')
     previous_arguments=dict(item.arguments)
     if body.decision=='revision':
         if body.quantity is None:
@@ -45,6 +49,10 @@ def decide(db,user,approval_id,body):
     else:
         requester=db.get(User,item.user_id)
         require(db,requester,'inventory.propose')
+        if wf.agent_id:
+            from .agent_runtime import assert_tool
+            if requester.workspace_id!=user.workspace_id:raise HTTPException(403,'Phê duyệt ngoài workspace.')
+            assert_tool(db,requester,wf,'propose_inventory_adjustment')
         toggles=db.get(SystemSetting,'tools')
         if toggles and not toggles.value.get(item.tool,True):
             raise HTTPException(409,'Công cụ áp dụng tồn kho đã bị tắt.')
@@ -54,6 +62,8 @@ def decide(db,user,approval_id,body):
         if changed.rowcount!=1:
             raise HTTPException(409,'Tồn kho đã thay đổi. Sửa tham số để tạo revision mới trước khi duyệt.')
         item.status='approved'
+        db.add(InventoryMovement(product_id=inv.product_id,user_id=user.id,reference='approval:'+item.id,
+                                 before=item.arguments['before'],after=item.arguments['quantity'],reason='Điều chỉnh sau phê duyệt '+item.id))
         item.approved_revision=item.revision
         wf.status='completed'
         wf.result={**wf.result,'summary':'Đã cập nhật tồn kho đúng một lần sau phê duyệt hợp lệ.','applied_revision':item.revision}
@@ -62,6 +72,9 @@ def decide(db,user,approval_id,body):
         emit(db,wf,'completed',wf.result)
     db.add(ApprovalDecision(approval_id=item.id,user_id=user.id,revision=body.revision,decision=body.decision,reason=body.reason,
                             arguments={'before':previous_arguments,'after':item.arguments}))
+    if wf.conversation_id and body.decision in ('approved','rejected'):
+        db.add(Message(conversation_id=wf.conversation_id,role='assistant',
+                       content=wf.result['summary'] if body.decision=='approved' else wf.error))
     audit(db,user,'approval.'+body.decision,item.id,{'revision':body.revision,'reason':body.reason,'arguments':item.arguments},wf.id)
     db.commit()
     return item

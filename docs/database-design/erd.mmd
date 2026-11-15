@@ -1,0 +1,209 @@
+erDiagram
+    audit_logs {
+        INTEGER id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+        VARCHAR_80 actor
+        VARCHAR_80 event
+        VARCHAR_80 resource
+        VARCHAR_80 correlation_id
+        JSON payload
+        VARCHAR_64 previous_hash
+        VARCHAR_64 hash
+    }
+    jobs {
+        VARCHAR_36 resource UK
+        VARCHAR_20 kind
+        VARCHAR_20 status
+        TIMESTAMP_WITH_TIME_ZONE lease_until
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    permissions {
+        VARCHAR_80 name PK
+    }
+    products {
+        VARCHAR_30 sku UK
+        VARCHAR_120 name
+        VARCHAR_80 category
+        NUMERIC_15__0 price
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    roles {
+        VARCHAR_20 name PK
+        JSON permissions
+    }
+    system_settings {
+        VARCHAR_80 key PK
+        JSON value
+    }
+    inventory {
+        VARCHAR_36 product_id PK
+        INTEGER quantity
+        INTEGER threshold
+        INTEGER version
+    }
+    sales {
+        VARCHAR_36 product_id FK
+        TIMESTAMP_WITH_TIME_ZONE date
+        INTEGER quantity
+        NUMERIC_15__0 revenue
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    users {
+        VARCHAR_180 email UK
+        VARCHAR_120 name
+        TEXT password_hash
+        VARCHAR_20 role FK
+        BOOLEAN active
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    auth_sessions {
+        VARCHAR_64 token_hash UK
+        VARCHAR_36 user_id FK
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    conversations {
+        VARCHAR_36 user_id FK
+        VARCHAR_120 title
+        JSON context
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    documents {
+        VARCHAR_36 user_id FK
+        VARCHAR_250 name
+        VARCHAR_30 status
+        VARCHAR_30 scope
+        TEXT path
+        TEXT content
+        INTEGER chunks
+        TEXT error
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    document_chunks {
+        VARCHAR_36 document_id FK
+        TEXT content
+        INTEGER page
+        INTEGER position
+        VECTOR_384 embedding
+        VARCHAR_120 model
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    messages {
+        VARCHAR_36 conversation_id FK
+        VARCHAR_20 role
+        TEXT content
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    workflows {
+        VARCHAR_36 user_id FK
+        VARCHAR_36 conversation_id FK
+        TEXT request
+        VARCHAR_30 status
+        JSON plan
+        JSON result
+        TEXT error
+        INTEGER checkpoint
+        INTEGER tokens
+        INTEGER duration_ms
+        BOOLEAN cancel_requested
+        VARCHAR_100 idempotency_key UK
+        TIMESTAMP_WITH_TIME_ZONE deadline
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    approval_requests {
+        VARCHAR_36 workflow_id FK
+        VARCHAR_36 user_id FK
+        VARCHAR_30 status
+        VARCHAR_80 tool
+        JSON arguments
+        INTEGER revision
+        INTEGER approved_revision
+        TIMESTAMP_WITH_TIME_ZONE expires_at
+        TEXT reason
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    reports {
+        VARCHAR_36 workflow_id FK
+        VARCHAR_36 user_id FK
+        VARCHAR_200 title
+        VARCHAR_30 type
+        JSON data
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    tool_executions {
+        VARCHAR_36 workflow_id FK
+        INTEGER position
+        VARCHAR_80 tool
+        JSON arguments
+        JSON output
+        INTEGER duration_ms
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    usage_records {
+        VARCHAR_36 user_id FK
+        VARCHAR_36 workflow_id FK
+        INTEGER tokens
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    workflow_events {
+        INTEGER sequence UK
+        VARCHAR_36 workflow_id FK
+        VARCHAR_50 type
+        JSON payload
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    workflow_steps {
+        VARCHAR_36 workflow_id FK
+        INTEGER position
+        VARCHAR_80 tool
+        VARCHAR_30 status
+        JSON output
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    approval_decisions {
+        VARCHAR_36 approval_id FK
+        VARCHAR_36 user_id FK
+        INTEGER revision
+        VARCHAR_20 decision
+        TEXT reason
+        JSON arguments
+        VARCHAR_36 id PK
+        TIMESTAMP_WITH_TIME_ZONE created_at
+    }
+    products ||--o| inventory : "product_id"
+    products ||--o{ sales : "product_id"
+    roles ||--o{ users : "role"
+    users ||--o{ auth_sessions : "user_id"
+    users ||--o{ conversations : "user_id"
+    users ||--o{ documents : "user_id"
+    documents ||--o{ document_chunks : "document_id"
+    conversations ||--o{ messages : "conversation_id"
+    users ||--o{ workflows : "user_id"
+    conversations |o--o{ workflows : "conversation_id"
+    workflows ||--o| approval_requests : "workflow_id"
+    users ||--o{ approval_requests : "user_id"
+    workflows ||--o| reports : "workflow_id"
+    users ||--o{ reports : "user_id"
+    workflows ||--o{ tool_executions : "workflow_id"
+    users ||--o{ usage_records : "user_id"
+    workflows ||--o| usage_records : "workflow_id"
+    workflows ||--o{ workflow_events : "workflow_id"
+    workflows ||--o{ workflow_steps : "workflow_id"
+    approval_requests ||--o{ approval_decisions : "approval_id"
+    users ||--o{ approval_decisions : "user_id"
