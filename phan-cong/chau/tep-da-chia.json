@@ -1,0 +1,28 @@
+{
+  "member": "Châu",
+  "features": [
+    "Quản lý hàng hóa và ảnh sản phẩm",
+    "Kết nối và đồng bộ dữ liệu Nova Commerce",
+    "Tính giá vốn, chi phí và lãi/lỗ theo tháng"
+  ],
+  "files": {
+    "src/business.tsx": "1846b6358b2513b436a9039d61e68de3ee604eeade142a9a79e8ede447468e5b",
+    "src/shop-connection.tsx": "1033f51f9e321521324d65d606d66032bf74edebf592d4561083ac0befb1f0cb",
+    "backend/app/products.py": "6ee588cf3f725404c831e3c09a47ce895e90749c7ff7396de5dd470ecbc68cba",
+    "backend/app/product_media.py": "dcaed0c0fb3e2af32b7bf953113a2329a1b73d2fb24f7d768ec3487253ffc255",
+    "backend/app/shop_connection.py": "56d4e0b4d97899b94d62f2ce8c4fea7b3f5dd7af097a9bfc082e147b898acdf3",
+    "backend/migrations/versions/0004_product_images.py": "5e30501f2bb86b409cb3329f54cd2d42654033e502e401ce2c419b3e4c79f581",
+    "backend/tests/test_products.py": "34a6743ab7765cd5295099e55a57ce8157f598dded4607c0397c7b27d9105ce1",
+    "backend/tests/test_product_media.py": "a334a0c1c9b3893cad4d31900905a3f1952c318ec2a9c74dca25b1557c570156",
+    "backend/tests/test_shop_connection.py": "e53a546b03c582d898805ee51722ec3a4625eb0e6bf0e49cff6472d1a1b08348",
+    "e2e/product-media.spec.ts": "77d144fceb29c22ced43a3ec9bd45d8c2ecd6d464d7a9b803d040b8973da0ffe",
+    "e2e/shop-connection.spec.ts": "5553f56a27812365fbc309fa29e650fa5e38e2f9ea2b2e80be6ba678455d6392",
+    "src/finance.tsx": "8641311d5c85aeb2ace3cfb27a37b3f6b20b5797522983eec6ac6b9c3d86e535",
+    "backend/app/finance.py": "d6ff97f37a20e5455d26277935688cdaf1cd6a0d1f18792a59695ee99366781d",
+    "backend/app/finance_excel.py": "26374ad292e3c8c16d8bf514079746b7a4431f7abd16062afa2a612779715fee",
+    "backend/migrations/versions/0005_finance.py": "2da8971ed8d7e10cf65f16da11d6cdc4ad7d5ccbb92a4f30ac82f515dec34e9f",
+    "backend/tests/test_finance.py": "8bf2b40b9744cde8f207a0a45d74d6910c82d36b03062f0f7bdf88061ecb5a21",
+    "e2e/finance.spec.ts": "a5929da4d71beefb1bf9326faa9ead6ea49265023ddf26432c35bd33dd8b4e58",
+    "e2e/finance-complete.spec.ts": "cb56cdd4fca7013e9571d697f7c153b86d7c61888ad389451a11870822ba9adb"
+  }
+}
