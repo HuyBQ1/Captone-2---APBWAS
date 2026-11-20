@@ -1,0 +1,21 @@
+{
+  "member": "Triều",
+  "features": [
+    "Đăng ký tài khoản",
+    "Quên và đặt lại mật khẩu",
+    "Quản lý hồ sơ tài khoản cá nhân",
+    "Quản lý phiên đăng nhập và thiết bị"
+  ],
+  "files": {
+    "src/public-accounts.tsx": "2703faf27e8eac15ec76888637747cd953b7ec8cdcf1265dc03df8c53b07a4b0",
+    "backend/app/public_accounts.py": "82ee57aa8df361a016ec709e2a45fd45510f2436c103219aaa2197ee9a8221a9",
+    "backend/migrations/versions/0013_registration_recovery.py": "73545aac264d89d342547792bc8b990922c7935babf4c94251e87be6099d0318",
+    "backend/tests/test_public_accounts.py": "8c1f930ef7c4028f97668624567c11eba627a68060cd7babb58282153d49bbd8",
+    "e2e/public-accounts.spec.ts": "378bf877cec8c331da6e1d1b721ab84d7ab369791950bdc6baac53a835e885a9",
+    "src/enterprise.tsx": "de9b3a86df49cb42d7c4706963c0421136658453c4209e3866005e78ce58079e",
+    "backend/app/auth.py": "2b98c10499132efddb6a3d590d9324932521dddde66766f3f940cd3e9d763eca",
+    "backend/app/enterprise.py": "7eb64bd5b30ba8606f4d21cd67e676d4bffc40858d720d3387026fe740ea764b",
+    "backend/tests/test_enterprise.py": "bf7faf31c385eb0104f1ae3352bcd777f360344d4fe0533bd7c9256ffa27f50d",
+    "e2e/enterprise.spec.ts": "a49e45f895491880ea6b5d5d41a70ac62bd65f7c18654483838d0da48041711b"
+  }
+}

@@ -20,6 +20,8 @@ def current_user(request: Request, db=Depends(get_db)):
     user = db.get(User, session.user_id)
     if not user or not user.active:
         raise HTTPException(401, 'Tài khoản đã bị khóa.')
+    if user.must_change_password and not request.url.path.startswith('/api/auth/'):
+        raise HTTPException(403,'Bạn cần đổi mật khẩu ban đầu trong Cài đặt tài khoản.')
     # SameSite plus origin validation for mutating browser requests.
     origin = request.headers.get('origin')
     if request.method not in ('GET','HEAD','OPTIONS') and origin:
@@ -28,7 +30,9 @@ def current_user(request: Request, db=Depends(get_db)):
             raise HTTPException(403, 'Origin không hợp lệ.')
     return user
 
-def create_session(db, user):
+def create_session(db, user, request=None):
     token = secrets.token_urlsafe(40)
-    db.add(AuthSession(user_id=user.id, token_hash=hashlib.sha256(token.encode()).hexdigest(), expires_at=now()+timedelta(hours=settings.session_hours)))
+    db.add(AuthSession(user_id=user.id, token_hash=hashlib.sha256(token.encode()).hexdigest(), expires_at=now()+timedelta(hours=settings.session_hours),
+                       device=(request.headers.get('user-agent','')[:250] if request else ''),ip_address=(request.client.host[:64] if request and request.client else '')))
+    user.last_login_at=now()
     return token
