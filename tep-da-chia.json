@@ -1,0 +1,30 @@
+{
+  "member": "Hiếu",
+  "features": [
+    "Báo cáo doanh số và xem chi tiết theo tháng",
+    "Kết nối Gmail và gửi email nhân viên",
+    "Xem trước tệp Word và Excel"
+  ],
+  "files": {
+    "src/nova-sales-report.tsx": "bc4a560dbf67ef607b2262c47313b0dbaf08fe1a613052f8e2b4eb2a9f7fc3bd",
+    "src/mail.tsx": "b36bdf19b51bac388630d7e24e6c5ebd4d1a3cc639933f708dce0cd6d7a7b6da",
+    "src/bulk-mail.tsx": "48be3c2e6a91e4f722513e916512f4633c4d11d30485b0bb8ef9f8871ecaf34d",
+    "backend/app/gmail.py": "b01b21d6b5401b9b7f1412d3c39025b256e35cef5e38e8880660ec80faab5b67",
+    "backend/app/mail_campaigns.py": "1af93611784389c9bba23365d14d820d52a8c7af081803a8547c3a159c1b7d7c",
+    "backend/migrations/versions/0007_gmail.py": "6b3c68df22a56670a8ec3cc63547e4ddbda925c782a086fb298c41c9ac65b8d3",
+    "backend/migrations/versions/0008_bulk_mail.py": "5f77dbcdadaea01946b344835f5cbae3dd7a3539a3fc36cb69c457e8ee1963d6",
+    "backend/migrations/versions/0011_mail_attachments.py": "6d9a5cd94b5b45653250ddbbfa10a0667ba07866305b4ddf7f56c8f898e6ab4b",
+    "backend/migrations/versions/0012_personal_gmail.py": "14858e619abd3af1b06f03b6d66a61217ec475bc667d35d56f1035ea3e1cc08b",
+    "backend/tests/test_gmail.py": "82176ccef2019115a97dbb6b7c04f9975bf653b41e8259078273a057bbc7ef18",
+    "backend/tests/test_bulk_mail.py": "ce914cfeab5d1f07afae423f4297d7688dbcc9e087591ea76eb2906b278dcb96",
+    "backend/tests/test_mail_attachments.py": "458737fbbf472c8757229bad9cde331db6392ae53d3199f55d0eb3c2d10d8366",
+    "e2e/gmail.spec.ts": "8dd9f767e3c16f210dc8d2fb4b2a8319602112882c857c4325ba6dfd003c7fb6",
+    "e2e/personal-gmail.spec.ts": "cd6ab5c5ee15c271cf7f06e45470c83264c15909736a6cf99dcf9867861be1cf",
+    "e2e/bulk-mail.spec.ts": "a20f6d58b7142dea951b1fecfc0d86bc6516e588bfcb30d1ce850312fb20d84d",
+    "src/file-preview.tsx": "75362927cf5a0be8e87cf08c026b7e45dd1d7f240ecfc6369d37e9fa2d9d0a75",
+    "backend/app/office_preview.py": "ee754d1d1d004f6e6e95406502c596fc36c17137b3483bb1098fdacf3af44f28",
+    "backend/tests/test_office_files.py": "c6a38d7b5b00822bec6e72cd7e3819dba97af17873d3e7cfd8e1114ae70f3810",
+    "backend/tests/test_word_documents.py": "0ec5576791d07269842437e2a6586755bcd6132504165a81de57694e141ac704",
+    "e2e/office-files.spec.ts": "740c77864634d9b50eaf0f0db6fb73eaf8add02d1bb9af722664ff25cd733d4b"
+  }
+}
